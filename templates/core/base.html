@@ -1,0 +1,23 @@
+{% load static %}
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/utility.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div>
+        {% include 'core/navbar.html' %}
+        {% include 'core/message.html' %}
+    </div>
+    <div id="home" class=" custom-scrollbar w-[100%] h-[95vh] overflow-auto">
+        {% block content %}
+    </div>
+    {% endblock %}
+    <script src="{% static '/js/base.js' %}"></script>
+</body>
+</html>

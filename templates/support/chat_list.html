@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Chats</title>
+</head>
+<body>
+    <h1>Your Chats</h1>
+    <ul>
+        {% for chat in chats %}
+            <li><a href="{% url 'chat_room' chat.cid %}">{{ chat.chat_name }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_chat' %}">Create a New Chat</a>
+</body>
+</html>

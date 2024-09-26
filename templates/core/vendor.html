@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Vendor
+{% endblock %}
+
+{% block content %}
+    <div class=" w-full">
+        <div class=" w-full md:w-3/4 mx-auto flex gap-3 flex-wrap ">
+            {% for v in vendors %}
+            <a href="{% url 'vendor-details' v.vid %}">
+                <div class=" p-2 bg-red-200 rounded-lg">
+                    <img class=" w-[250px] h-[300px] object-contain" src="{{ v.image.url }}" alt="{{ v.title }}">
+                    <h1 class=" text-lg font-bold"> Provide By : {{v.user}}</h1>
+                    <p class=" italic font-bold ">Shop Name : {{v.title}}</p>
+                    <div>{{v.product.all.count}} product</div>
+                    <div>Contact : {{v.contact}}<br>{{v.address}}</div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

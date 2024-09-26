@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Payment
+{% endblock %}
+
+{% block content %}
+<div class=" flex justify-center">
+    <form action="/payment-request/" method="post" >
+        {% csrf_token %}
+        <input type="text" name="order_oid" id="" class="hidden" value="{{order_oid}}" >
+        <div id="fassdfadf" class=" px-2 w-full">
+            <h1 class=" font-bold"> Cash on Delivary System :</h1>
+            <div class="flex flex-wrap px-9 gap-9">
+                <p onclick="payment_method('bkash')" class="p-2 hover:cursor-pointer bg-purple-500 shadow-sm z-10 rounded-md">Bkash</p>
+                <p onclick="payment_method('nagad')" class="p-2 hover:cursor-pointer bg-purple-500 shadow-sm z-10 rounded-md">Nagad</p>
+                <p onclick="payment_method('roket')" class="p-2 hover:cursor-pointer bg-purple-500 shadow-sm z-10 rounded-md">Roket</p>
+                
+            </div>
+            
+            <h1 class=" font-bold"> Full Payment : </h1>
+            <div class="flex flex-wrap px-9 gap-9">
+                <p class="p-2 bg-purple-500 shadow-sm z-10 rounded-md">Bkash</p>
+                <p class="p-2 bg-purple-500 shadow-sm z-10 rounded-md">Nagad</p>
+                <p class="p-2 bg-purple-500 shadow-sm z-10 rounded-md">Roket</p>
+                <p class="p-2 bg-purple-500 shadow-sm z-10 rounded-md">Bank</p>
+                <p class="p-2 bg-purple-500 shadow-sm z-10 rounded-md">Card</p>
+            </div>
+        </div>
+        
+    </form>
+</div>
+{% endblock %}

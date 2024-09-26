@@ -1,0 +1,118 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Product Details
+{% endblock %}
+
+{% block content %}
+<div class="w-full md:w-1/2 mx-auto flex justify-center">
+  <div class=" bg-gray-500 rounded-xl">
+    <div class=" w-full flex justify-between">
+      <div class="p-4 bg-green-400 rounded-lg">{{ product_details.get_percentage|floatformat:2 }}%</div>
+    </div>
+    <div class="w-full my-0">
+      <img class=" md:w-[500px] md:h-[500px] object-contain" src="{{ product_details.image.url }}"
+        alt="{{ product_details.title }}" />
+    </div>
+    <div class="p-4 rounded-lg">
+      {% for tag in product_details.tags.all %}
+      <a href="/product/tag/{{tag.name}}/">
+        <span class=" py-2 text-green-400">#{{tag.name}}</span>
+      </a>
+      {% endfor %}
+    </div>
+
+
+    <div class="flex flex-wrap md:gap-4 gap-2">
+      <p class="p-2 bg-white rounded-xl text-wrap text-sm md:text-lg "> Rating : {{ avg_rating.rating |floatformat:1 }} out of 5.0</p>
+      <p class="p-2 bg-white rounded-xl text-wrap text-sm md:text-lg ">Prise :{{ product_details.price }} $</p>
+
+      {% if product_details.product_status %}
+      <p class="p-2 bg-white rounded-xl text-wrap text-sm md:text-lg ">Avaiable</p>
+      {% else %}
+      <p class="p-2 bg-white rounded-xl text-wrap text-sm md:text-lg ">Not Avaiable</p>
+      {% endif %}
+
+      {% if product_details.in_stoke %}
+      <p class="p-2 bg-white rounded-xl text-wrap text-sm md:text-lg ">In Stoke</p>
+      {% else %}
+      <p class="p-2 bg-white rounded-xl text-wrap text-sm md:text-lg ">Out of Stoke</p>
+      {% endif %}
+
+      <p class="p-2 bg-white rounded-xl text-wrap text-sm md:text-lg ">Update : {{product_details.update}}</p>
+
+      {% if product_details.featured %}
+      <p class="p-2 bg-white rounded-xl text-wrap text-sm md:text-lg ">Featured : Yes</p>
+      {% else %}
+      <p class="p-2 bg-white rounded-xl text-wrap text-sm md:text-lg ">Featured : No</p>
+      {% endif %}
+
+      {% if product_details.digital %}
+      <p class="p-2 bg-white rounded-xl text-wrap text-sm md:text-lg "> Digital : Yes </p>
+      {% endif %}
+
+      <p class="p-2 bg-white rounded-xl text-wrap text-sm md:text-lg ">{{ product_details.catagori }}</p>
+    </div>
+
+    <div class="h-[2px] bg-red-700 w-full"></div>
+
+    <div id="bar" class="flex flex-wrap my-2 py-2 p-1 gap-2 md:gap-4 ">
+      <p class="p-3 hover:cursor-pointer bg-white rounded-xl text-wrap text-sm md:text-lg Specifications">Specifications</p>
+      <p class="p-3 hover:cursor-pointer bg-white rounded-xl text-wrap text-sm md:text-lg Description">Description</p>
+      <p class="p-3 hover:cursor-pointer bg-white rounded-xl text-wrap text-sm md:text-lg Review">Review({{review.count}})</p>
+      <p class="p-3 hover:cursor-pointer bg-white rounded-xl text-wrap text-sm md:text-lg Ownership">Ownership</p>
+    </div>
+
+    <div id="continer" class=" flex justify-center my-1">
+      <p id="speci" class=" text-wrap text-xl"> specifications :{{product_details.specifications | safe}}</p>
+      <p id="Des" class=" hidden text-wrap text-xl"> description :{{product_details.description | safe}}</p>
+      <div id="Review" class="Review hidden text-wrap">
+        {% for r in review %}
+        <div class=" flex gap-3 my-2">
+          <span class=" font-bold text-green-400">{{r.user.username}}</span>
+          <div>
+
+          {% if r.rating == 1 %}
+          <span>⭐</span>
+          {% elif r.rating == 2 %}
+          <span>⭐⭐</span>
+          {% elif r.rating == 3 %}
+          <span>⭐⭐⭐</span>
+          {% elif r.rating == 4 %}
+          <span>⭐⭐⭐⭐</span>
+          {% elif r.rating == 4 %}
+          <span>⭐⭐⭐⭐</span>
+          {% elif r.rating == 5 %}
+          <span>⭐⭐⭐⭐⭐</span>
+          {% endif %}
+          <br>
+          {{r.review | safe}}
+          </div>
+        </div>
+        
+        {% endfor %}
+      </div>
+      <p id="Ownership" class="Ownership hidden">By <a href="">{{ product_details.user }}</a></p>
+    </div>
+  
+
+    <div class="flex justify-between">
+      <p id="addReview" class=" hover:cursor-pointer p-2 bg-purple-400 text-green-400 rounded-lg"> Add Review</p>
+      <p id="{{ product_details.pid }}" onclick="add('{{ product_details.pid }}')" class=" hover:cursor-pointer p-2 bg-purple-400 text-green-400 rounded-lg">Add To Chart</p>
+    </div>
+    <div id="form" class=" hidden w-full">
+      <form id="abcd" action="{% url 'add-review' product_details.pid %}" method="post">
+        {% csrf_token %}
+        <div>{{R_form.rating}}</div>
+        <div class=" w-full h-24">{{R_form.review}}</div>
+        <button id="submitBTN" class="text-center py-3 bg-red-500 text-black">Submit</button>
+      </form>
+    </div>
+  </div>
+  
+  <script src="{% static '/js/pro_Details.js' %}"></script>
+</div>
+
+{% endblock %}

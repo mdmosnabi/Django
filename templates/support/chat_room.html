@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ chat.chat_name }}</title>
+</head>
+<body>
+    <h1>{{ chat.chat_name }}</h1>
+    <div id="chat-log" style="height: 400px; overflow-y: scroll;">
+        {% for message in chat.messages.all %}
+            <div><strong>{{ message.sender.username }}:</strong> {{ message.content }}</div>
+        {% endfor %}
+    </div>
+    <form id="chat-message-form">
+        <input id="chat-message-input" type="text" size="100" autocomplete="off" placeholder="Type a message...">
+        <button id="chat-message-submit">Send</button>
+    </form>
+
+    <script>
+        const chatSocket = new WebSocket(
+            'ws://' + window.location.host + '/ws/chat/{{ chat.cid }}/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('#chat-log').innerHTML += `<div><strong>${data.sender}:</strong> ${data.message}</div>`;
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error(e);
+        };
+
+        document.querySelector('#chat-message-form').onsubmit = function(e) {
+            e.preventDefault();
+            const messageInput = document.querySelector('#chat-message-input');
+            const message = messageInput.value;
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            messageInput.value = '';
+        };
+    </script>
+</body>
+</html>

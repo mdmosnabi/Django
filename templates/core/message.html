@@ -1,0 +1,23 @@
+<div id="message-container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} relative p-4 mb-4 border rounded shadow-md" role="alert">
+                {{ message }}
+                <button type="button" class="close absolute top-0 right-0 mt-2 mr-2" aria-label="Close" onclick="this.parentElement.style.display='none';">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const alerts = document.querySelectorAll(".alert");
+        alerts.forEach(alert => {
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 3000);
+        });
+    });
+</script>

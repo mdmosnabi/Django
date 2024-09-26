@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+MY SHOP
+{% endblock %}
+
+{% block content %}
+    <div class=" w-full">
+        <div class="">
+            <div class=" font-bold text-lg p-3 flex flex-wrap justify-around">
+                {% if tag.name %}
+                <div class=" text-green-400 text-sm font-bold md:text-2xl"> #{{tag.name}}</div>
+                {% else %}
+                <h3>Welcome to My E-Commerce Site</h3>
+                <h3>Find the best products here!</h3>
+                {% endif %}
+            </div>
+        </div>
+        <div class=" w-full md:w-3/4 mx-auto flex gap-3 flex-wrap ">
+            {% if products %}
+            {% for product in products %}
+                {% include 'core/product_card.html' %}
+            {% endfor %}
+            {% else %}
+            <div class=" w-full md:w-3/4 mx-auto flex justify-center flex-wrap "> <span>No Data</span></div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+

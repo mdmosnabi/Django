@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}
+Bayling Address
+{% endblock %}
+
+{% block content %}
+<div class="w-full h-full flex justify-center items-center flex-wrap text-xl font-bold">
+    <div>
+
+        {{message}}
+        <div class=" flex justify-center">
+            <a class=" bg-purple-500 p-2 text-center" href="{% url 'home' %}"> Go to home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+
+{% load static %}
+    <nav class=" flex sticky top-0 md:justify-between flex-wrap px-4 py-1 bg-purple-300">
+        <div>
+            <h1 class=" text-center"><a href="{% url 'home' %}" class="text-blue-500 hover:underline">MY SHOP</a></h1>
+        </div>
+        <div class=" flex gap-2 md:gap-4 items-center flex-wrap">
+
+            <div class=" px-2 py-1 rounded-lg bg-white">
+                <form action="/sharch" method="get"> 
+                    <input class=" bg-gray-500 px-2 text-white h-10 w-40 rounded-xl" type="text" name="q" placeholder="Sharch">
+                    <button type="submit"><img class=" invert" src="{% static 'svg/sharch.svg' %}" alt="sharch"></button>
+                </form>
+            </div>
+
+            <div class="relative">
+                <button id="filter" class=" focus:outline-none">
+                    Filter
+                </button>
+                <div id="filterForm" class="hidden absolute px-2 right-0 mt-2  bg-white rounded-md shadow-lg py-1 z-20">
+                    <form action="/filter/" method="get">
+                        <div id="vendor_name">
+                        </div>
+                        <div>
+                            <div class=" w-full h-[3px] bg-red-700"></div>
+                            <span> price:</span>
+                            <input type="range" name="min_p" id="input_range" min="0" max="1000" value="0">
+                            <div class=" flex gap-2 justify-between">
+                                <p id="start_P" >0$</p>
+                                <p>to</p>
+                                <select name="max_p" id="end_P">
+                                    <option value="1000">Defult</option>
+                                    <option value="100">100$</option>
+                                    <option value="500">500$</option>
+                                    <option value="1000">1000$</option>
+                                    <option value="5000">5000$</option>
+                                    <option value="10000">10000$</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class=" bg-red-300 p-3 rounded-lg text-black" type="submit">filtered</button>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <a href="{% url 'vendor' %}"> All Shop</a>
+            </div>
+
+            <div onclick="cart1()" class=" hover:cursor-pointer" id="Cart">
+                Cart
+            </div>
+            <div class="relative">
+                <button id="catagories" class=" focus:outline-none">
+                    Catagories
+                </button>
+                <div id="catagoryItem" class="hidden absolute right-0 mt-2 md:w-48 bg-white rounded-md shadow-lg py-1  z-20">
+                    
+                </div>
+            </div>
+
+            <div>
+                
+                 Support
+            </div>
+
+            <div class="relative">
+                <button id="accountButton" class=" focus:outline-none">
+                    <a href="{% url 'account' %}">Account</a>
+                </button>
+                
+            </div>
+        </div>
+    </nav>
+    <script src="{% static 'js/script.js' %}"></script>
+    

@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Vendor Details
+{% endblock %}
+
+{% block content %}
+    <div class=" w-full">
+        <div class=" w-full md:w-3/4 mx-auto flex gap-3 flex-wrap ">
+            {% for v in vendors %}
+            <a href="{% url 'vendor-details' v.vid %}">
+                <div class=" p-2 bg-red-200 rounded-lg">
+                    <img class=" w-[250px] h-[300px] object-contain" src="{{ v.image.url }}" alt="{{ v.title }}">
+                    <h1 class=" text-lg font-bold"> Provide By : {{v.user}}</h1>
+                    <p class=" italic font-bold ">Shop Name : {{v.title}}</p>
+                    <div> Total :{{v.product.all.count}} product</div>
+                    <div>Contact : {{v.contact}}<br>{{v.address}}</div>
+                    <div class=" w-[300px] text-green-300 text-wrap"> Description : {{v.description}}</div>
+                    <div> Chat time : {{ v.chat_resp_time}}</div>
+                    <div> Shipping : {{v.shipping_on_time}} Days for Aboard</div>
+                    <div>Authentic_rating : {{v.authentic_rating}}</div>
+                    <div class=" w-[300px] text-green-300 text-wrap"> Return : {{v.days_return}} Days</div>
+                    <div class=" w-[300px] text-green-300 text-wrap"> Waranty : {{v.warranty_preiods}} Days</div>
+
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

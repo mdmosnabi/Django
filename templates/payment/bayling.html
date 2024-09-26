@@ -1,0 +1,206 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Bayling Address
+{% endblock %}
+
+{% block content %}
+<div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold mb-6 text-center">Bayling Address Form</h1>
+
+    <form method="POST" action="" class="space-y-6">
+        {% csrf_token %}
+
+        <div>
+            <label for="your_name" class="block text-sm font-medium text-gray-700">Your Name</label>
+            <input type="text" required name="your_name" id="your_name" value=""
+                class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-500"
+                placeholder="enter your name" />
+        </div>
+
+
+        <div>
+            <label for="phone_number" class="block text-sm font-medium text-gray-700">Phone Number</label>
+            <input type="text" required name="phone_number" id="phone_number" value=""
+                class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-500"
+                placeholder="enter your phone number" />
+        </div>
+
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" name="email" id="email" value=""
+                class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-500"
+                placeholder="Enter your email" />
+        </div>
+
+        <div>
+            <label for="division" class="block text-sm font-medium text-gray-700">Division</label>
+            <select name="division" id="division"
+                class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-500">
+                <option value="dhaka" selected="">DHAKA</option>
+
+                <option value="chattogram">CHATTOGRAM</option>
+
+                <option value="rajshahi">RAJSHAHI</option>
+
+                <option value="khulna">KHULNA</option>
+
+                <option value="barishal">BARISHAL</option>
+
+                <option value="sylhet">SYLHET</option>
+
+                <option value="rangpur">RANGPUR</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="district" class="block text-sm font-medium text-gray-700">District</label>
+            <select name="district" id="district"
+                class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-500">
+                <option value="bagerhat">BAGERHAT</option>
+
+                <option value="bandarban">BANDARBAN</option>
+
+                <option value="barguna">BARGUNA</option>
+
+                <option value="barishal">BARISHAL</option>
+
+                <option value="bhola">BHOLA</option>
+
+                <option value="bogura">BOGURA</option>
+
+                <option value="brahmanbaria">BRAHMANBARIA</option>
+
+                <option value="chapainawabganj">CHAPAINAWABGANJ</option>
+
+                <option value="chandpur">CHANDPUR</option>
+
+                <option value="chattogram">CHATTOGRAM</option>
+
+                <option value="chuadanga">CHUADANGA</option>
+
+                <option value="cumilla">CUMILLA</option>
+
+                <option value="coxsbazar">COXSBAZAR</option>
+
+                <option value="dinajpur">DINAJPUR</option>
+
+                <option value="dhaka" selected="">DHAKA</option>
+
+                <option value="faridpur">FARIDPUR</option>
+
+                <option value="feni">FENI</option>
+
+                <option value="gaibandha">GAIBANDHA</option>
+
+                <option value="gazipur">GAZIPUR</option>
+
+                <option value="gopalganj">GOPALGANJ</option>
+
+                <option value="habiganj">HABIGANJ</option>
+
+                <option value="jamalpur">JAMALPUR</option>
+
+                <option value="jashore">JASHORE</option>
+
+                <option value="jhalokathi">JHALOKATHI</option>
+
+                <option value="jhenaidah">JHENAIDAH</option>
+
+                <option value="joypurhat">JOYPURHAT</option>
+
+                <option value="khagrachari">KHAGRACHARI</option>
+
+                <option value="kishoreganj">KISHOREGANJ</option>
+
+                <option value="khulna">KHULNA</option>
+
+                <option value="kurigram">KURIGRAM</option>
+
+                <option value="kushtia">KUSHTIA</option>
+
+                <option value="lakshmipur">LAKSHMIPUR</option>
+
+                <option value="lalmonirhat">LALMONIRHAT</option>
+
+                <option value="madaripur">MADARIPUR</option>
+
+                <option value="magura">MAGURA</option>
+
+                <option value="manikganj">MANIKGANJ</option>
+
+                <option value="meherpur">MEHERPUR</option>
+
+                <option value="moulvibazar">MOULVIBAZAR</option>
+
+                <option value="munshiganj">MUNSHIGANJ</option>
+
+                <option value="mymensingh">MYMENSINGH</option>
+
+                <option value="narail">NARAIL</option>
+
+                <option value="narayanganj">NARAYANGANJ</option>
+
+                <option value="narsingdi">NARSINGDI</option>
+
+                <option value="natore">NATORE</option>
+
+                <option value="netrokona">NETROKONA</option>
+
+                <option value="nilphamari">NILPHAMARI</option>
+
+                <option value="noakhali">NOAKHALI</option>
+
+                <option value="pabna">PABNA</option>
+
+                <option value="panchagarh">PANCHAGARH</option>
+
+                <option value="patuakhali">PATUAKHALI</option>
+
+                <option value="pirojpur">PIROJPUR</option>
+
+                <option value="rajbari">RAJBARI</option>
+
+                <option value="rajshahi">RAJSHAHI</option>
+
+                <option value="rangamati">RANGAMATI</option>
+
+                <option value="rangpur">RANGPUR</option>
+
+                <option value="satkhira">SATKHIRA</option>
+
+                <option value="shariatpur">SHARIATPUR</option>
+
+                <option value="sherpur">SHERPUR</option>
+
+                <option value="sirajganj">SIRAJGANJ</option>
+
+                <option value="sunamganj">SUNAMGANJ</option>
+
+                <option value="sylhet">SYLHET</option>
+
+                <option value="tangail">TANGAIL</option>
+
+                <option value="thakurgaon">THAKURGAON</option>
+            </select>
+        </div>
+
+
+        <div>
+            <label for="home_address" class="block text-sm font-medium text-gray-700">Home Address</label>
+            <input type="text" required name="home_address" id="home_address" value=""
+                class="block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-500"
+                placeholder="your home address" />
+        </div>
+        <input type="number" class="hidden" name="order_oid" value="{{order_oid}}" >
+
+        <!-- Submit Button -->
+        <div>
+            <button type="submit"
+                class="w-full bg-indigo-600 text-black p-2 rounded-lg shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-offset-2">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

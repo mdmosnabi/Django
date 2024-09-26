@@ -1,0 +1,105 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}
+Account
+{% endblock %}
+
+{% block content %}
+<div class="flex justify-center">
+    <div id="accountMenu" class="md:w-1/2 bg-white rounded-md shadow-lg py-1 z-20">
+        <div class="font-bold text-xl">Your Order:</div>
+        {% if orders_with_details %}
+        <ul>
+            {% for detail in orders_with_details %}
+            <li name="{{ detail.order.oid }}" onclick="sh_o_detail('{{ detail.order.oid }}')">
+                <p class="px-4 my-1 hover:cursor-pointer bg-green-300 hover:bg-gray-500">Order created at: {{ detail.order.created_at }}</p>
+                <div id="{{ detail.order.oid }}" class="hidden px-4 py-1">
+                    
+                    <p>Payment status: {{ detail.order.payment_status }}</p>
+                    <p>Payment mode: {{ detail.order.payment_mode }}</p>
+                    <p>Total price: {{ detail.order.total_price }}</p>
+                    <p>Items:</p>
+                    <ul>
+                        {% for item in detail.order.items.all %}
+                        <li data-name="{{ item.product.pid }}" class="flex justify-between px-4">
+                            <div>{{ item.product }} x {{ item.quantity }}</div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    
+                    <!-- Bayling Address -->
+                    {% if detail.bayling %}
+                    <div class="mt-4">
+                        <p class="font-bold">Bayling Address:</p>
+                        <p> Billar Name: {{ detail.bayling.your_name }}</p>
+                        <p>Phone Number: {{ detail.bayling.phone_number }}</p>
+                        <p>Email: {{ detail.bayling.email }}</p>
+                        <p>Division: {{ detail.bayling.division }}</p>
+                        <p>District: {{ detail.bayling.district }}</p>
+                        <p>Home Address: {{ detail.bayling.home_address }}</p>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Payment Request -->
+                    {% if detail.payment_req %}
+                    <div class="mt-4">
+                        <p class="font-bold">Payment Request:</p>
+                        <p> Billar Name: {{ detail.payment_req.your_name }}</p>
+                        <p>Status: {{ detail.payment_req.is_accept|yesno:"Accepted,Pending..." }}</p>
+                        <p>Transaction: {{ detail.payment_req.transaction }}</p>
+                        <p>Payment Method: {{ detail.payment_req.payment_method }}</p>
+                        <p>Payment Date: {{ detail.payment_req.tr_date|date:"j F, Y" }}</p>
+                    </div>
+                    {% endif %}
+                    
+                    {% if not detail.order.payment_status %}
+                    <div class="flex justify-between flex-wrap mt-4">
+                        <button class="p-1 my-1 mx-1 rounded-lg bg-purple-500 shadow-sm z-20" onclick="update_order('{{ detail.order.oid }}')">Update</button>
+                        {% if not detail.bayling %}
+                        <button id="test-bkash" onclick="P_for_D('{{ detail.order.oid }}')" class="p-1 my-1 mx-1 rounded-lg bg-purple-500 shadow-sm z-20">Add address</button>
+                        {% else %}
+                        <button id="test-bkash" onclick="P_for_D('{{ detail.order.oid }}')" class="p-1 my-1 mx-1 rounded-lg bg-purple-500 shadow-sm z-20">Change address</button>
+                        {% endif %}
+
+
+                        {% if not detail.payment_req %}
+                        <div class="p-1 my-1 mx-1 rounded-lg bg-purple-500 shadow-sm z-20">
+                            <a href="{% url 'payment-add' detail.order.oid %}">Add Payment</a>
+                        </div>
+                        {% else %}
+                        <div class="p-1 my-1 mx-1 rounded-lg bg-purple-500 shadow-sm z-20">
+                            <a href="{% url 'payment-add' detail.order.oid %}">Change Payment</a>
+                        </div>
+                        {% endif %}
+                        <button class="p-1 my-1 mx-1 rounded-lg bg-purple-500 shadow-sm z-20" onclick="cancleOrder('{{ detail.order.oid }}')">Cancel order</button>
+                    </div>
+                    {% else %}
+                    <div class="flex flex-wrap items-center justify-center mt-4">
+                        <p>Your product is on the way. Please wait for delivery...</p>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="h-1 my-3 bg-red-500 w-full"></div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div class="px-4 py-1">
+            No orders are here.
+            <a class="p-3 shadow-xl z-20 bg-white text-black rounded-lg" href="{% url 'home' %}">Go to shop</a>
+            <div class="h-1 bg-red-500 w-full"></div>
+        </div>
+        {% endif %}
+
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'sing-out' %}" class="block px-4 py-1 text-gray-700 hover:bg-gray-100">
+            LogOut
+            <div class="text-red-500 text-sm">You are logged in</div>
+        </a>
+        {% else %}
+        <a href="{% url 'sing-out' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">LogIn</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
