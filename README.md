@@ -1,4 +1,4 @@
-asgiref==3.8.1
+asgiref==3.8.1 <br>
 attrs==24.2.0
 autobahn==24.4.2
 Automat==24.8.1
